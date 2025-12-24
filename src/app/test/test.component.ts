@@ -20,6 +20,8 @@ import { Component, OnInit } from '@angular/core';
     <h2>2+2={{2+2}}</h2>  <!--//angular can evaluate expressions inside {{}} and bind the result to template-->
     <h2>{{"Welcome "+name}}</h2> <!--//{{}} can also concatenate strings-->
 
+
+
     <!--//next example is using javascript properties and methods within curly braces {{}}-->
     <h2>{{name.length}}</h2> <!--//name.length gives length of string stored in name variable-->
     <h2>{{name.toUpperCase()}}</h2> <!--//name.toUpperCase() converts string to uppercase-->
@@ -41,6 +43,104 @@ import { Component, OnInit } from '@angular/core';
     //let's do that in TestComponent class-->
     <h2>{{currentUrl}}</h2>
 
+
+
+    <!--//property binding example (feature-branch-propertyBinding in git)-->
+
+    <!--//property binding is used to bind properties of HTML elements to component variables-->
+    <!--//we use square brackets [] for property binding-->
+    <!--//let's see an example of property binding--><!--but before that we need to understand difference between attribute and property of HTML elements
+    <!--//attribute is defined in HTML markup and is static--> <!--//$0.getAttribute('value')--> <!--//for example, value attribute of input element is static-->
+    <!--//it does not change even if user types something in input field-->
+    <!--//but property is defined in DOM(Documnet Object Model) and is dynamic--> <!--//$0.value --> <!--//for example, value property of input element is dynamic-->
+    <!--//it changes as user types something in input field-->
+    <!--//what is DOM? Document Object Model (DOM) is a programming interface for web documents. It represents the page so that programs can change the document structure, style, and content. The DOM represents the document as nodes and objects; that way, programming languages can interact with the page.-->
+    <!--//DOM is created by browser when HTML page is loaded//it is a tree-like structure representing HTML elements as objects such as tags, attributes, text, etc.//we can access and manipulate DOM using JavaScript//for example, we can get value of input element using JavaScript//using getAttribute() method to get attribute value//using value property to get current value//
+    <!--//DOM is dynamic and changes as user interacts with page//for example, when user types something in input field, value property of input element changes accordingly
+    <!--//example of DOM propeties are value, innerHTML, style, className, etc.//we can access and modify these properties using JavaScript
+    <!--//for example, we can change innerHTML of a div element using JavaScript//we can also add event listeners to DOM elements using JavaScript//for example, we can add click event listener to a button element using JavaScript//this allows us to create interactive web pages
+    <!--//end of discussion on DOM
+    
+    <!--//what is HTML attribute? An HTML attribute is a modifier of an HTML element that provides additional information about the element. Attributes are always included in the opening tag of an element and usually come in name/value pairs like name="value".--> 
+    <!--//example of HTML attributes are id, class, src, href, alt, title, etc.//we can access these attributes using JavaScript//using getAttribute() and setAttribute() methods
+    <!--//for example, we can get id attribute of a div element using getAttribute('id') method//we can also set class attribute of a div element using setAttribute('class', 'newClass') method
+    <!--//HTML attributes are static and do not change as user interacts with page//for example, if we set value attribute of input element to "myName", it will always remain "myName" regardless of what user types in input field
+    <!--//end of discussion on HTML attributes
+    <!--//to summarize, HTML attributes are static and defined in HTML markup//DOM properties are dynamic and defined in DOM tree created by browser//we can access and manipulate both using JavaScript-->
+    
+    <!--//may i know coressponding DOM properties of HTML attributes?-->
+    <!--//here are some common HTML attributes and their corresponding DOM properties-->
+    <!--//id attribute corresponds to id property-->
+    <!--//class attribute corresponds to className property-->
+    <!--//src attribute corresponds to src property-->
+    <!--//href attribute corresponds to href property-->
+    <!--//alt attribute corresponds to alt property-->
+    <!--//title attribute corresponds to title property-->
+    <!--//value attribute corresponds to value property-->
+    <!--//innerHTML attribute corresponds to innerHTML property-->
+    <!--//style attribute corresponds to style property-->
+    <!--//we can access these properties using JavaScript-->
+    <!--//for example, we can get id property of a div element using element.id-->
+    <!--//we can also set className property of a div element using element.className = 'newClass'-->
+    <!--//end of discussion on HTML attributes and DOM properties--><!--//so both are same? as i can see they have same names?-->
+    <!--//not exactly same//HTML attributes are defined in HTML markup and are static//DOM properties are defined in DOM tree created by browser and are dynamic//they may have same names but they are different concepts//for example, value attribute of input element is static and does not change as user types something in input field//but value property of input element is dynamic and changes as user types something in input field-->
+    <!--//so we have a DOM corresponding to each HTML attribute?-->
+    <!--//yes, most HTML attributes have corresponding DOM properties//but not all attributes have corresponding properties//for example, data-* attributes do not have corresponding properties//also, some properties may not have corresponding attributes//for example, innerHTML property does not have corresponding attribute//it is used to get or set HTML content of an element//but there is no innerHTML attribute in HTML markup-->
+    <!--//end of discussion on HTML attributes and DOM properties correspondence-->   
+
+    <!--//in Angular, property binding is used to bind DOM properties to component variables//we use square brackets [] for property binding-->
+   
+    <!--//property binding in angular is actually binding to properties of DOM elements not HTML attributes-->
+   
+    <!--//now, let's see example of property binding in Angular-->
+    
+    <!--//for example, to bind value property of input element to component variable-->
+    <!--//we use property binding syntax [value]="name"-->
+    <input type="text" [value]="name"/> <!--//property binding  -->
+    <!--//here, we are binding value property of input element to name variable defined in component class-->
+    <!--//so, input field will display value of name variable-->
+    <!--//if we change value of name variable in component class-->
+    <!--//input field will automatically update to reflect new value-->
+    <!--//this is one-way data binding from component to template using property binding-->
+    
+    <!--//property is defined in DOM(Documnet Object Model) and is dynamic--> 
+    <!--//so value property of input element is dynamic-->
+    <!--//it changes as user types something in input field-->
+    <!--//so, value property gives current value of input element  -->
+    <!-- $0.value <!--// (check in console)-->
+    
+    
+    <!--//now, let's see another example of property binding-->   
+    <!--<input type="text" value="myName"/> --><!--//property binding  --><!--//static value attribute
+    <!--//here, we are setting static value attribute of input element to "myName"-->
+    <!--//so, input field will always display "myName" regardless of component variable values-->
+    <!--//this is not data binding, just static attribute setting--> 
+    <!--//value attribute gives initial value of input element, so, value attribute is used just to initialize the HTML input element-->  
+    <!--//value attribute of input element is static-->
+    <!--//it does not change even if user types something in input field-->
+    <!-- $0.getAttribute('value') //(uncommit <input type="text" value="myName"/> and check in console)-->
+
+   
+    <!--//so, to summarize, HTML attributes are static and defined in HTML markup//DOM properties are dynamic and defined in DOM tree created by browser//we can access and manipulate both using JavaScript-->
+    <!--//end of discussion on DOM properties and HTML attributes-->
+
+    <!--//property binding in angular is actually binding to properties of DOM elements not HTML attributes-->
+    <!--//so, when we do [value]="name", we are actually binding to value property of input element-->
+    <!--//not value attribute-->
+    <!--//this is important distinction to understand when working with property binding in Angular-->
+    <!--//end of property binding discussion-->
+
+    <input [id]="myId" type="text" [value]="name"/> <!--//Another example of property binding--!>
+    <!--//binding id property of input element to myId variable defined in component class-->
+    <!--//here, we are binding id property of input element to myId variable defined in component class-->
+    <!--//so, input element will have id attribute set to value of myId variable defined in component class-->
+    <!--//this is another example of one-way data binding from component to template using property binding-->
+
+     <input bind-id="myId" type="text" [value]="name"/> //  <!--//Another way of writing property binding using bind- prefix-->
+    <!--//both [id]="myId" and bind-id="myId" are equivalent-->
+    <!--//they both bind id property of input element to myId variable defined in component class-->
+    <!--//this is just different syntax for property binding in Angular-->
+    <!--//end of property binding examples--> 
     `,
     
   styles: []
@@ -58,7 +158,7 @@ export class TestComponent implements OnInit {
 //public name: string = "Ashish";//
 //private name: string = "Ashish";//
 //protected name: string = "Ashish";//
-
+public myId = "testId";
 public name = "Ashish Shukla";//type inference means automatically detects type of variable based on value assigned
 //no need to mention type explicitly
 //typeScript is smart enough to detect type based on value assigned
