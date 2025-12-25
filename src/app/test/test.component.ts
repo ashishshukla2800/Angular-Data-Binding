@@ -74,8 +74,73 @@ import { Component, OnInit } from '@angular/core';
 <input type ="text" [(ngModel)]="name"> {{name}}<!--//two-way data binding example using ngModel directive--><!--//here, we are binding input field value to name variable in component class using [(ngModel)] syntax but we need to import FormsModule in app.module.ts for ngModel to work i did that already as you can see in app.module.ts file but still its showing me error red underline under ngModel because u need to restart ur IDE to recognize the newly imported module so just ignore that error for now-->
 <!--//so, whenever we type something in input field, it will update name variable in component class and also display updated value in template using {{name}} syntax.-->
 
+<!--//this is end of discussion on data binding examples in Angular-->
 
-`,
+<!--//next topic is about DOM manipulation using javascript-->
+<!--//DOM stands for Document Object Model-->
+<!--//it is a programming interface for web documents-->
+<!--//<div //element is used to define a division or a section in an HTML document. It is a block-level element that is commonly used as a container for other HTML elements to style them with CSS or to manipulate them with JavaScript.<!--//how javascript manipulate to html elements? //by accessing DOM(Document Object Model) //DOM is a programming interface for web documents. It represents the page so that programs can change the document structure, style, and content.//DOM represents the document as nodes and objects.//with DOM, we can access and manipulate HTML elements using javascript.//for example, we can use document.getElementById() method to get an element by its ID and then change its content or style using javascript.//example://-->
+<!--//<div id="myDiv">This is my div</div>
+<!--//<script>  //javascript code to manipulate HTML element
+<!--//   document.getElementById("myDiv").innerHTML = "Hello, World!"; //changing content of div element with id myDiv     
+<!--//</script> --><!--//this code will change content of div element to "Hello, World!" when the page loads.//this is how javascript manipulate HTML elements using DOM.//end of example-->  
+<!--//</div>-->
+<!--//Ok, but here in Angular, we generally do not manipulate DOM directly using javascript because 
+// Angular provides its own way of manipulating DOM using data binding and directives.
+// //we can use interpolation syntax {{}} to bind data from component to template and vice versa.
+// //we can also use structural directives like *ngIf and *ngFor to conditionally render elements or loop through arrays.//this way, we can keep our code clean and maintainable without directly manipulating DOM using javascript.
+// //end of discussion on DOM manipulation in Angular
+// //Ok so its because angular support typescript and typescript is superset of javascript so all javascript code is valid in typescript but not all typescript code is valid in javascript because typescript has additional features like static typing, interfaces, classes, decorators etc.//so we can use javascript code in typescript files but we need to be careful about type safety and other typescript features.
+// //end of discussion on typescript and javascript relationship//
+--end of discussion on div and DOM manipulation in Angular-->
+
+<!--// Now Structural Directives three common directives are *ngIf, *ngFor, and *ngSwitch-->
+    <div *ngIf="name.length > 5">Name is longer than 5 characters</div> //*ngIf directive example
+   
+    <!--
+      //another example of ngif for hiding/showing element based on condition-->
+      <div *ngIf="name === 'Ashish Shukla'; else elseBlock">
+        <h3>Hello Ashish Shukla, welcome back!</h3>
+      </div>
+      <ng-template #elseBlock>
+        <h3>Hello Guest, please log in.</h3>
+      </ng-template>
+     
+      <!--//end of ngif example-->
+    
+    //*ngFor directive example
+    <ul>
+      <!--//<li *ngFor="let char of name">{{char}}</li>--> 
+      <!--//looping through each character of name variable and displaying it in list item //li element using {{char}} syntax for data binding//but i am getting Cannot find a differ supporting object 'Ashish Shukla' of type 'string'. NgFor only supports binding to Iterables such as Arrays.//this error occurs because ngFor directive expects an iterable like array or list but we are passing a string variable name which is not iterable.//to fix this error, we can convert string to array using split() method.//so we can update ngFor directive to use name.split('') instead of name variable directly.//this will convert string to array of characters and ngFor can iterate over it.//let's update the code accordingly.//
+      <!--//updated code below-->
+      <li *ngFor="let char of name.split('')">{{char}}</li> <!--//*ngFor directive example fixed--> //now it should work fine without error   
+    </ul>
+      
+    <!--//another example of ngFor displaying index along with character-->
+    
+      <div *ngFor="let char of name.split(''); let i = index">
+        <span>{{i}}: {{char}}</span>
+      </div>
+    
+    <!--//when to use li and ul and when to use div and span here//span used for inline elements like text or small pieces of content within a block element//div used for block-level elements that group larger sections of content//so in ngFor example above, we used li and ul because we are displaying list of characters which is a block-level content//but in second example, we used div and span because we are displaying index and character together which is more like inline content within a block//so choice of using div/span or ul/li depends on the type of content we are displaying and how we want to structure it in HTML//generally, use div/span for grouping related content and ul/li for lists of items-->
+    <!--//we generally use ul and li for lists of items like displaying list of names, products, etc. -->
+    
+      <!--//end of ngFor example-->   
+    
+      //ngSwitch directive example
+      <div [ngSwitch]="name.length">
+        <div *ngSwitchCase="0">Name is empty</div>
+        <div *ngSwitchCase="1">Name has 1 character</div>
+        <div *ngSwitchCase="2">Name has 2 characters</div>
+        <div *ngSwitchDefault>Name has more than 2 characters</div>
+      </div>
+      <!--//end of ngSwitch example-->
+      
+      <!--// end of discussion on structural directives in Angular-->
+   
+    
+    
+    `,
     
   styles: []
 })
