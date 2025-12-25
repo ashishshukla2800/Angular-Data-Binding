@@ -41,7 +41,41 @@ import { Component, OnInit } from '@angular/core';
     //let's do that in TestComponent class-->
     <h2>{{currentUrl}}</h2>
 
-    `,
+
+    <!--//Now, we have seen one-way data binding from component to template using interpolation syntax-->
+    <!--//sometimes we want data binding from template to component like clicking a button(onclick) to change value of variable in component or onmouseover to update variable in component-->
+    <!--//or entering text in input field to update variable in component-->
+    <!--//for that we use event binding and two-way data binding-->
+    <!--//we will discuss those in later examples-->
+
+<button (click)="onClick()">greet</button> {{greeting}} <!--//event binding example using (click) event-->
+<!--//so event binding is let say capture any DOM event and perform some actions in component class-->
+<!--//here, we are capturing click event of button and calling onClick() method in component class-->
+<!--//we need to define onClick() method in TestComponent class-->
+
+<!--template reference variable example-->
+<br>
+<input #myInput type="text"> <!--//using template reference variable to get input value as want to show in greeting message or alert on button click or log in console-->
+<button (click)="showMessage(myInput.value)">Greet User</button> <!--//passing input value to showMessage() method as parameter in component class-->
+    {{greeting}}
+<!--//In the above example, we have used template reference variable myInput to get input value-->
+<!--//and passed it to showMessage() method in component class on button click-->
+<!--//we need to define showMessage() method in TestComponent class-->
+
+<!--//now lets do two-way data binding example in next examples-->
+<!--//two-way data binding allows data to flow in both directions-->
+<!--//from component to template and from template to component-->
+<!--//means allow us to update a property in component and at same time display updated value in template and vice versa-->
+<!--//we will use ngModel directive for two-way data binding-->
+<!--//but for that we need to import FormsModule in app.module.ts-->
+<!--//we will discuss that in next examples-->
+
+
+<input type ="text" [(ngModel)]="name"> {{name}}<!--//two-way data binding example using ngModel directive--><!--//here, we are binding input field value to name variable in component class using [(ngModel)] syntax but we need to import FormsModule in app.module.ts for ngModel to work i did that already as you can see in app.module.ts file but still its showing me error red underline under ngModel because u need to restart ur IDE to recognize the newly imported module so just ignore that error for now-->
+<!--//so, whenever we type something in input field, it will update name variable in component class and also display updated value in template using {{name}} syntax.-->
+
+
+`,
     
   styles: []
 })
@@ -58,7 +92,7 @@ export class TestComponent implements OnInit {
 //public name: string = "Ashish";//
 //private name: string = "Ashish";//
 //protected name: string = "Ashish";//
-
+public greeting: string = "";//variable to store greeting message on button click
 public name = "Ashish Shukla";//type inference means automatically detects type of variable based on value assigned
 //no need to mention type explicitly
 //typeScript is smart enough to detect type based on value assigned
@@ -221,4 +255,14 @@ ngOnInit() {//lifecycle hook method
     //throw new Error('Method not implemented.');
     return "Hello " + this.name + ", welcome to Angular!";//returning greeting message using name variable
 }
+onClick() {
+    console.log("Button clicked");//logging message to console on button click
+    //alert("Hello " + this.name + ", welcome to Angular!");//showing alert on button click using name variable   
+    this.greeting = "Hello " + this.name + ", welcome to Angular!";//updating greeting variable with message on button click
+    alert(this.greeting);//showing alert with greeting message
+    }
+
+showMessage(message: string) {
+    this.greeting = "Hello " + this.name + ", " + message;//updating greeting variable with message from input
+    }
 }
